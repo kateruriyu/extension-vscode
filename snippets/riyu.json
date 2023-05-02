@@ -1,0 +1,267 @@
+{
+	".source.riyu": {
+		"editor.quickSuggestions": {
+			"strings": true
+		},
+		"import riyu code": {
+			"prefix": "use",
+			"description": "Insert an import directive.",
+			"body": "use \"${0:package}\";"
+		},
+ 		"create abstract class": {
+			"prefix": "abstract",
+			"description": "Insert an abstract class definition.",
+			"body": [
+				"abstract class ${1:Name} {",
+				"    $0",
+				"}"
+			]
+		},
+		"create interface": {
+			"prefix": "interface",
+			"description": "Insert an interface definition.",
+			"body": [
+				"interface ${1:Name} {",
+				"    $0",
+				"}"
+			]
+		},
+		"enum": {
+			"prefix": "enum",
+			"description": "Insert an enum definition.",
+			"body": [
+				"enum ${1:Name} {",
+				"    $0",
+				"}"
+			]
+		},
+		"create class": {
+			"prefix": "class",
+			"description": "Insert a class definition.",
+			"body": [
+				"class ${1:Name} {",
+				"    $0",
+				"}"
+			]
+		},
+		"implements for interface": {
+			"prefix": "implements",
+			"description": "Insert an implements clause.",
+			"body": "implements ${0:Name}"
+		},
+		"create var variable": {
+			"prefix": "var",
+			"description": "Insert a variable declaration.",
+			"body": "var ${0:name};"
+		},
+		"create constant variable": {
+			"prefix": "const",
+			"description": "Insert a constant declaration.",
+			"body": "const ${0:name};"
+		},
+		"return value": {
+			"prefix": "return value",
+			"description": "Insert a return statement.",
+			"body": "return ${0:value};"
+		},
+		"return": {
+			"prefix": "return",
+			"description": "Insert a return statement.",
+			"body": "return;"
+		},
+		"break": {
+			"prefix": "break",
+			"description": "Insert a break statement.",
+			"body": "break;"
+		},
+		"continue": {
+			"prefix": "continue",
+			"description": "Insert a continue statement.",
+			"body": "continue;"
+		},
+		"throw": {
+			"prefix": "throw",
+			"description": "Insert a throw statement.",
+			"body": "throw ${0:exception};"
+		},
+		"assert": {
+			"prefix": "assert",
+			"description": "Insert an assert statement.",
+			"body": "assert(${0:condition});"
+		},
+		"print to conosole": {
+			"prefix": "print",
+			"description": "Insert a print statement.",
+			"body": "print(${0:value});"
+		},
+		"main": {
+			"prefix": "main",
+			"description": "Insert a main function, used as an entry point.",
+			"body": [
+				"function main() {",
+				"    $0",
+				"}"
+			]
+		},
+		"try": {
+			"prefix": "try",
+			"description": "Insert a try/catch block.",
+			"body": [
+				"try {",
+				"    $0",
+				"} catch (${1:e}) {",
+				"}"
+			]
+		},
+		"if": {
+			"prefix": "if",
+			"description": "Insert an if statement.",
+			"body": [
+				"if ($1) {",
+				"    $0",
+				"}"
+			]
+		},
+		"if else": {
+			"prefix": "if else",
+			"description": "Insert an if statement with an else block.",
+			"body": [
+				"if ($1) {",
+				"    $2",
+				"} else {",
+				"    $0",
+				"}"
+			]
+		},
+		"switch case": {
+			"prefix": "switch",
+			"description": "Insert a switch statement.",
+			"body": [
+				"switch ($1) {",
+				"    case $2:",
+				"        $0",
+				"        break;",
+				"    default:",
+				"}"
+			]
+		},
+		"for": {
+			"prefix": "for",
+			"description": "Insert a for loop.",
+			"body": [
+				"for (var i = 0; i < ${1:count}; i++) {",
+				"    $0",
+				"}"
+			]
+		},
+		"for in": {
+			"prefix": "for in",
+			"description": "Insert a for-in loop.",
+			"body": [
+				"for (var ${1:item} in ${2:items}) {",
+				"    $0",
+				"}"
+			]
+		},
+		"while": {
+			"prefix": "while",
+			"description": "Insert a while loop.",
+			"body": [
+				"while ($1) {",
+				"    $0",
+				"}"
+			]
+		},
+		"do while": {
+			"prefix": "do",
+			"description": "Insert a do-while loop.",
+			"body": [
+				"do {",
+				"    $0",
+				"} while ($1);"
+			]
+		},
+		"create function": {
+			"prefix": "fn",
+			"description": "Insert a function definition.",
+			"body": [
+				"fn ${1:name} => ${0:expression};"
+			]
+		},
+		"insert name function": {
+			"prefix": "function",
+			"description": "Insert a function definition.",
+			"body": [
+				"function"
+			]
+		},
+		"full function": {
+			"prefix:": "function",
+			"description": "Insert a function definition.",
+			"body": [
+				"function ${1:name}() {",
+				"    $0",
+				"}"
+			]
+		},
+		"create function default function": {
+			"prefix": "function",
+			"description": "Insert a function definition.",
+			"body": [
+				"${3:function} ${1:name}(${2}) {",
+				"    $0",
+				"}"
+			]
+		},
+		"typedef": {
+			"prefix": "typedef",
+			"description": "Insert a typedef.",
+			"body": "typedef ${1:Type} ${2:Name}(${3:params});"
+		},
+		"insert true": {
+			"prefix": "true",
+			"description": "Insert a true literal.",
+			"body": "true"
+		},
+		"insert false": {
+			"prefix": "false",
+			"description": "Insert a false literal.",
+			"body": "false"
+		},
+		"insert null": {
+			"prefix": "null",
+			"description": "Insert a null literal.",
+			"body": "null"
+		},
+		"insert this": {
+			"prefix": "this",
+			"description": "Insert a this literal.",
+			"body": "this"
+		},
+		"insert super": {
+			"prefix": "super",
+			"description": "Insert a super literal.",
+			"body": "super"
+		},
+		"insert new": {
+			"prefix": "new",
+			"description": "Insert a new expression.",
+			"body": "new ${0:Type}()"
+		},
+		"insert new list": {
+			"prefix": "new list",
+			"description": "Insert a new list expression.",
+			"body": "new List<${1:Type}>(${2:args})"
+		},
+		"insert new map": {
+			"prefix": "new map",
+			"description": "Insert a new map expression.",
+			"body": "new Map<${1:Type}, ${2:Type}>(${3:args})"
+		},
+		"insert new set": {
+			"prefix": "new set",
+			"description": "Insert a new set expression.",
+			"body": "new Set<${1:Type}>(${2:args})"
+		}
+	}
+}
