@@ -1,0 +1,649 @@
+{
+	"name": "riyu",
+	"version": "0.0.2",
+	"fileTypes": [
+		"riyu"
+	],
+	"scopeName": "source.riyu",
+	"foldingStartMarker": "\\{\\s*$",
+	"foldingStopMarker": "^\\s*\\}",
+	"patterns": [
+		{
+			"name": "meta.preprocessor.script.riyu",
+			"match": "^(#!.*)$"
+		},
+		{
+			"name": "meta.declaration.riyu",
+			"begin": "^\\w*\\b(library|use|part of|part|export|package)\\b",
+			"beginCaptures": {
+				"0": {
+					"name": "keyword.other.import.riyu"
+				}
+			},
+			"end": ";",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.terminator.riyu"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#strings"
+				},
+				{
+					"include": "#comments"
+				},
+				{
+					"name": "keyword.other.import.riyu",
+					"match": "\\b(as|show)\\b"
+				},
+				{
+					"name": "keyword.control.riyu",
+					"match": "\\b(if)\\b"
+				}
+			]
+		},
+		{
+			"name": "meta.arguments.riyu",
+			"begin": "\\(",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.section.arguments.begin.riyu"
+				}
+			},
+			"end": "\\)",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.section.arguments.end.riyu"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#comments"
+				},
+				{
+					"include": "#strings"
+				},
+				{
+					"include": "#punctuation"
+				},
+				{
+					"include": "#annotations"
+				},
+				{
+					"include": "#keywords"
+				},
+				{
+					"include": "#constants-and-special-vars"
+				},
+				{
+					"include": "#operators"
+				}
+			]
+		},
+		{
+			"name": "meta.function.riyu",
+			"begin": "(\\w+\\s+)?(\\w+)\\s*(\\()",
+			"beginCaptures": {
+				"1": {
+					"name": "storage.type.riyu"
+				},
+				"2": {
+					"name": "entity.name.function.riyu"
+				},
+				"3": {
+					"name": "punctuation.section.arguments.begin.riyu"
+				}
+			},
+			"end": "(\\))",
+			"endCaptures": {
+				"1": {
+					"name": "punctuation.section.arguments.end.riyu"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#comments"
+				},
+				{
+					"include": "#strings"
+				},
+				{
+					"include": "#punctuation"
+				},
+				{
+					"include": "#annotations"
+				},
+				{
+					"include": "#keywords"
+				},
+				{
+					"include": "#constants-and-special-vars"
+				},
+				{
+					"include": "#operators"
+				},
+				{
+					"include": "#arguments"
+				}
+			]
+		},
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#punctuation"
+		},
+		{
+			"include": "#annotations"
+		},
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#constants-and-special-vars"
+		},
+		{
+			"include": "#operators"
+		},
+		{
+			"include": "#strings"
+		}
+	],
+	"repository": {
+		"riyudoc": {
+			"patterns": [
+				{
+					"match": "(\\[.*?\\])",
+					"captures": {
+						"0": {
+							"name": "variable.name.source.riyu"
+						}
+					}
+				},
+				{
+					"match": "^ {4,}(?![ \\*]).*",
+					"captures": {
+						"0": {
+							"name": "variable.name.source.riyu"
+						}
+					}
+				},
+				{
+					"contentName": "variable.other.source.riyu",
+					"begin": "```.*?$",
+					"end": "```"
+				},
+				{
+					"match": "(`.*?`)",
+					"captures": {
+						"0": {
+							"name": "variable.other.source.riyu"
+						}
+					}
+				},
+				{
+					"match": "(`.*?`)",
+					"captures": {
+						"0": {
+							"name": "variable.other.source.riyu"
+						}
+					}
+				},
+				{
+					"match": "(\\* ((    ).*))$",
+					"captures": {
+						"2": {
+							"name": "variable.other.source.riyu"
+						}
+					}
+				}
+			]
+		},
+		"comments": {
+			"patterns": [
+				{
+					"name": "comment.block.empty.riyu",
+					"match": "/\\*\\*/",
+					"captures": {
+						"0": {
+							"name": "punctuation.definition.comment.riyu"
+						}
+					}
+				},
+				{
+					"include": "#comments-doc-oldschool"
+				},
+				{
+					"include": "#comments-doc"
+				},
+				{
+					"include": "#comments-inline"
+				}
+			]
+		},
+		"comments-doc-oldschool": {
+			"patterns": [
+				{
+					"name": "comment.block.documentation.riyu",
+					"begin": "/\\*\\*",
+					"end": "\\*/",
+					"patterns": [
+						{
+							"include": "#comments-doc-oldschool"
+						},
+						{
+							"include": "#comments-block"
+						},
+						{
+							"include": "#riyudoc"
+						}
+					],
+					"captures": {
+						"0": {
+							"name": "punctuation.definition.comment.riyu"
+						}
+					}
+				}
+			]
+		},
+		"comments-doc": {
+			"patterns": [
+				{
+					"name": "comment.block.documentation.riyu",
+					"begin": "///",
+					"while": "^\\s*///",
+					"patterns": [
+						{
+							"include": "#riyudoc"
+						}
+					]
+				}
+			]
+		},
+		"comments-inline": {
+			"patterns": [
+				{
+					"include": "#comments-block"
+				},
+				{
+					"match": "((//).*)$",
+					"captures": {
+						"1": {
+							"name": "comment.line.double-slash.riyu"
+						}
+					}
+				}
+			]
+		},
+		"comments-block": {
+			"patterns": [
+				{
+					"name": "comment.block.riyu",
+					"begin": "/\\*",
+					"end": "\\*/",
+					"patterns": [
+						{
+							"include": "#comments-block"
+						}
+					]
+				}
+			]
+		},
+		"annotations": {
+			"patterns": [
+				{
+					"name": "storage.type.annotation.riyu",
+					"match": "@[a-zA-Z]+"
+				}
+			]
+		},
+		"constants-and-special-vars": {
+			"patterns": [
+				{
+					"name": "constant.language.riyu",
+					"match": "(?<!\\$)\\b(true|false|null)\\b(?!\\$)"
+				},
+				{
+					"name": "variable.language.riyu",
+					"match": "(?<!\\$)\\b(this|super)\\b(?!\\$)"
+				},
+				{
+					"name": "constant.numeric.riyu",
+					"match": "(?<!\\$)\\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)\\b(?!\\$)"
+				},
+				{
+					"include": "#class-identifier"
+				},
+				{
+					"include": "#function-identifier"
+				}
+			]
+		},
+		"class-identifier": {
+			"patterns": [
+				{
+					"match": "(?<!\\$)\\b(bool|num|int|double|dynamic)\\b(?!\\$)",
+					"name": "support.class.riyu"
+				},
+				{
+					"match": "(?<!\\$)\\bfn\\b(?!\\$)",
+					"name": "storage.type.primitive.riyu"
+				},
+				{
+					"begin": "(?<![a-zA-Z0-9_$])([_$]*[A-Z][a-zA-Z0-9_$]*)\\b",
+					"end": "(?!<)",
+					"beginCaptures": {
+						"1": {
+							"name": "support.class.riyu"
+						}
+					},
+					"patterns": [
+						{
+							"include": "#type-args"
+						}
+					]
+				}
+			]
+		},
+		"function-identifier": {
+			"patterns": [
+				{
+					"match": "([_$]*[a-z][a-zA-Z0-9_$]*)(<(?:[a-zA-Z0-9_$<>?]|,\\s*|\\s+extends\\s+)+>)?[!?]?\\(",
+					"captures": {
+						"1": {
+							"name": "entity.name.function.riyu"
+						},
+						"2": {
+							"patterns": [
+								{
+									"include": "#type-args"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"type-args": {
+			"begin": "(<)",
+			"end": "(>)",
+			"beginCaptures": {
+				"1": {
+					"name": "other.source.riyu"
+				}
+			},
+			"endCaptures": {
+				"1": {
+					"name": "other.source.riyu"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#class-identifier"
+				},
+				{
+					"match": ","
+				},
+				{
+					"name": "keyword.declaration.riyu",
+					"match": "extends"
+				}
+			]
+		},
+		"keywords": {
+			"patterns": [
+				{
+					"name": "keyword.cast.riyu",
+					"match": "(?<!\\$)\\bas\\b(?!\\$)"
+				},
+				{
+					"name": "keyword.control.catch-exception.riyu",
+					"match": "(?<!\\$)\\b(try|on|catch|finally|throw|rethrow)\\b(?!\\$)"
+				},
+				{
+					"name": "keyword.control.riyu",
+					"match": "(?<!\\$)\\b(break|case|continue|default|do|else|for|if|in|return|switch|while|when)\\b(?!\\$)"
+				},
+				{
+					"name": "keyword.control.riyu",
+					"match": "(?<!\\$)\\b(sync(\\*)?|async(\\*)?|await|yield(\\*)?)\\b(?!\\$)"
+				},
+				{
+					"name": "keyword.control.riyu",
+					"match": "(?<!\\$)\\bassert\\b(?!\\$)"
+				},
+				{
+					"name": "keyword.control.new.riyu",
+					"match": "(?<!\\$)\\b(new)\\b(?!\\$)"
+				},
+				{
+					"name": "keyword.declaration.riyu",
+					"match": "(?<!\\$)\\b(abstract|sealed|base|interface|class|enum|extends|extension|external|factory|implements|get(?!\\()|mixin|native|operator|set(?!\\()|typedef|with|covariant|string)\\b(?!\\$)"
+				},
+				{
+					"name": "storage.modifier.riyu",
+					"match": "(?<!\\$)\\b(static|final|const|required|late)\\b(?!\\$)"
+				},
+				{
+					"name": "storage.type.primitive.riyu",
+					"match": "(?<!\\$)\\b(?:function|var)\\b(?!\\$)"
+				}
+			]
+		},
+		"operators": {
+			"patterns": [
+				{
+					"name": "keyword.operator.riyu",
+					"match": "(?<!\\$)\\b(is\\!?)\\b(?!\\$)"
+				},
+				{
+					"name": "keyword.operator.ternary.riyu",
+					"match": "\\?|:"
+				},
+				{
+					"name": "keyword.operator.bitwise.riyu",
+					"match": "(<<|>>>?|~|\\^|\\||&)"
+				},
+				{
+					"name": "keyword.operator.assignment.bitwise.riyu",
+					"match": "((&|\\^|\\||<<|>>>?)=)"
+				},
+				{
+					"name": "keyword.operator.closure.riyu",
+					"match": "(=>)"
+				},
+				{
+					"name": "keyword.operator.comparison.riyu",
+					"match": "(==|!=|<=?|>=?)"
+				},
+				{
+					"name": "keyword.operator.assignment.arithmetic.riyu",
+					"match": "(([+*/%-]|\\~)=)"
+				},
+				{
+					"name": "keyword.operator.assignment.riyu",
+					"match": "(=)"
+				},
+				{
+					"name": "keyword.operator.increment-decrement.riyu",
+					"match": "(\\-\\-|\\+\\+)"
+				},
+				{
+					"name": "keyword.operator.arithmetic.riyu",
+					"match": "(\\-|\\+|\\*|\\/|\\~\\/|%)"
+				},
+				{
+					"name": "keyword.operator.logical.riyu",
+					"match": "(!|&&|\\|\\|)"
+				}
+			]
+		},
+		"string-interp": {
+			"patterns": [
+				{
+					"match": "\\$([a-zA-Z0-9_]+)",
+					"captures": {
+						"1": {
+							"name": "variable.parameter.riyu"
+						}
+					}
+				},
+				{
+					"name": "string.interpolated.expression.riyu",
+					"begin": "\\$\\{",
+					"end": "\\}",
+					"patterns": [
+						{
+							"include": "#constants-and-special-vars",
+							"name": "variable.parameter.riyu"
+						},
+						{
+							"include": "#strings"
+						},
+						{
+							"name": "variable.parameter.riyu",
+							"match": "[a-zA-Z0-9_]+"
+						}
+					]
+				},
+				{
+					"name": "constant.character.escape.riyu",
+					"match": "\\\\."
+				}
+			]
+		},
+		"strings": {
+			"patterns": [
+				{
+					"name": "string.interpolated.triple.double.riyu",
+					"begin": "(?<!r)\"\"\"",
+					"end": "\"\"\"(?!\")",
+					"patterns": [
+						{
+							"include": "#string-interp"
+						}
+					]
+				},
+				{
+					"name": "string.interpolated.triple.single.riyu",
+					"begin": "(?<!r)'''",
+					"end": "'''(?!')",
+					"patterns": [
+						{
+							"include": "#string-interp"
+						}
+					]
+				},
+				{
+					"name": "string.quoted.triple.double.riyu",
+					"begin": "r\"\"\"",
+					"end": "\"\"\"(?!\")"
+				},
+				{
+					"name": "string.quoted.triple.single.riyu",
+					"begin": "r'''",
+					"end": "'''(?!')"
+				},
+				{
+					"name": "string.interpolated.double.riyu",
+					"begin": "(?<!\\|r)\"",
+					"end": "\"",
+					"patterns": [
+						{
+							"name": "invalid.string.newline",
+							"match": "\\n"
+						},
+						{
+							"include": "#string-interp"
+						}
+					]
+				},
+				{
+					"name": "string.quoted.double.riyu",
+					"begin": "r\"",
+					"end": "\"",
+					"patterns": [
+						{
+							"name": "invalid.string.newline",
+							"match": "\\n"
+						}
+					]
+				},
+				{
+					"name": "string.interpolated.single.riyu",
+					"begin": "(?<!\\|r)'",
+					"end": "'",
+					"patterns": [
+						{
+							"name": "invalid.string.newline",
+							"match": "\\n"
+						},
+						{
+							"include": "#string-interp"
+						}
+					]
+				},
+				{
+					"name": "string.quoted.single.riyu",
+					"begin": "r'",
+					"end": "'",
+					"patterns": [
+						{
+							"name": "invalid.string.newline",
+							"match": "\\n"
+						}
+					]
+				}
+			]
+		},
+		"punctuation": {
+			"patterns": [
+				{
+					"name": "punctuation.comma.riyu",
+					"match": ","
+				},
+				{
+					"name": "punctuation.terminator.riyu",
+					"match": ";"
+				},
+				{
+					"name": "punctuation.dot.riyu",
+					"match": "\\."
+				},
+				{
+					"name": "punctuation.bracket.riyu",
+					"match": "[\\[\\]]"
+				},
+				{
+					"name": "punctuation.brace.riyu",
+					"match": "[\\{\\}]"
+				},
+				{
+					"name": "punctuation.parenthesis.riyu",
+					"match": "[\\(\\)]"
+				},
+				{
+					"name": "punctuation.colon.riyu",
+					"match": ":"
+				},
+				{
+					"name": "punctuation.at.riyu",
+					"match": "@"
+				},
+				{
+					"name": "punctuation.dollar.riyu",
+					"match": "\\$"
+				},
+				{
+					"name": "punctuation.backslash.riyu",
+					"match": "\\\\"
+				},
+				{
+					"name": "punctuation.definition.comment.riyu",
+					"match": "///"
+				}
+			]
+		}
+	}
+}
